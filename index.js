@@ -19,8 +19,12 @@ parser.use(containers(parser)); // 定义自定义的块容器
 
 module.exports = function (source) {
     this.cacheable && this.cacheable(); //缓存
-    
-    const render = parser.render(source + `[[toc]]`); //追加左侧目录
+
+    let render = parser.render(source + `[[toc]]`); //追加左侧目录
+
+    //模块化
+    let card = render.replace(/<h3 id=/g, '__h__<h3 id=').replace(/<h2 id=/g, '__h__<h2 id=').split('__h__');
+    render = card.map(obj => { return obj.indexOf('<h3') === 0 ? `<div class="markdown-card">${obj}</div>` : obj; }).join('');
 
     return `<template><div class="markdown-content">${render}</div></template>`;
 };

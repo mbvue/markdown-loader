@@ -2,16 +2,24 @@
 MarkDown Loader
 
 ## Installation
+```js
 yarn add -D @mbvue/markdown-loader
+```
 
 ## Styles:
+```js
 import '@mbvue/markdown-loader/style.css';
+```
 
 ## Demo:
+```css
 import DemoBlock from '@mbvue/markdown-loader/demo-block.vue';
+
 app.component('demo-block', DemoBlock);
+```
 
 ## Usage
+```js
 webpack.config.js：
 
 module.exports = {
@@ -21,19 +29,23 @@ module.exports = {
         ]
     }
 };
+```
 
+```html
 :::tip
-Tip
+Content
 :::
 
 :::warning
-Warning
+Content
 :::
 
 :::danger
-Danger
+Content
 :::
 
 :::demo
-&lt;menu&gt;menu&lt;/menu&gt;
+
+<menu>menu<menu>
 :::
+```

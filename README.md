@@ -2,7 +2,7 @@
 MarkDown Loader
 
 ## Installation
-```js
+```bash
 yarn add -D @mbvue/markdown-loader
 ```
 

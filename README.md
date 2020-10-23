@@ -44,7 +44,7 @@ Content
 Content
 :::
 
-:::demo
+:::demo html
 
 <menu>menu<menu>
 :::

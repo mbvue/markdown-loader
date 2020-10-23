@@ -26,6 +26,14 @@
     cursor: not-allowed;
     pointer-events: none;
 }
+
+.markdown-content h2 .header-anchor, .markdown-content h3 .header-anchor{
+    display: none;
+}
+
+.markdown-content h2:hover .header-anchor, .markdown-content h3:hover .header-anchor{
+    display: inline-block;
+}
   
 .markdown-content table {
     width: 100%;
@@ -52,7 +60,7 @@
   
 .markdown-content table td {
     padding: 8px;
-    border-top: 1px solid #f1f4f8;
+    border-top: 1px solid #ebedf0;
 }
   
 .markdown-content table td:first-child {
@@ -199,6 +207,7 @@
 }
   
 .markdown-content .table-of-contents {
+    width: 230px;
     position: fixed;
     top: 0;
     right: 15px;
@@ -207,33 +216,62 @@
 }
   
 .markdown-content .table-of-contents ul {
-    margin: 0 0 0 10px;
+    width: 100%;
+    margin: 0;
     padding: 0;
     list-style: none;
 }
   
 .markdown-content .table-of-contents ul li {
+    width: 100%;
     margin: 3px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: all .3s;
 }
-  
+
+.markdown-content .table-of-contents ul li ul {
+    margin: 0 0 0 10px;
+}
+
 .markdown-content .table-of-contents ul li a {
     text-decoration: none;
-    color: initial;
+    color: rgba(0,0,0,.65);
+}
+
+.markdown-content .table-of-contents ul li a:hover{
+    color: #1890ff;
+}
+
+.markdown-content .table-of-contents ul li ul li a {
+    font-size: 13px;
 }
 
 .markdown-content .markdown-demo-block{
-    padding: 20px;
     margin-top: 12px;
     border: 1px solid #ebedf0;
     border-radius: 5px;
 }
 
 .markdown-content .markdown-demo-block .markdown-demo-block-source{
-    margin-bottom: 20px;
+    padding: 12px;
 }
 
 .markdown-content .markdown-demo-block .markdown-demo-block-button{
+    margin-bottom: 12px;
     text-align: center;
     cursor: pointer;
+    color: #aeb0b3;
+    user-select: none;
+}
+
+.markdown-content .markdown-demo-block .markdown-demo-block-button:hover{
+    color: inherit;
+}
+
+.markdown-content .markdown-demo-block .markdown-demo-block-code .hljs{
+    margin: 0;
+    border-radius: 0;
 }
   

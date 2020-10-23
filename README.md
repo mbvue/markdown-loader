@@ -5,10 +5,11 @@ MarkDown Loader
 yarn add -D @mbvue/markdown-loader
 
 ## Styles:
-@mbvue/markdown-loader/style.css
+import '@mbvue/markdown-loader/style.css';
 
 ## Demo:
-@mbvue/markdown-loader/demo-block.vue
+import DemoBlock from '@mbvue/markdown-loader/demo-block.vue';
+app.component('demo-block', DemoBlock);
 
 ## Usage
 webpack.config.js：
@@ -34,5 +35,5 @@ Danger
 :::
 
 :::demo
-<menu>menu</menu>
+&lt;menu&gt;menu&lt;/menu&gt;
 :::

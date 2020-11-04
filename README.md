@@ -1,51 +1,53 @@
-## Vendor
-MarkDown Loader
-
 ## Installation
 ```bash
+npm install --save-dev @mbvue/markdown-loader
+#OR
 yarn add -D @mbvue/markdown-loader
 ```
 
-## Styles:
-```js
-import '@mbvue/markdown-loader/style.css';
-```
-
-## Demo:
-```css
-import DemoBlock from '@mbvue/markdown-loader/demo-block.vue';
-
-app.component('demo-block', DemoBlock);
-```
-
 ## Usage
+1、webpack.config.js：
 ```js
-webpack.config.js：
-
 module.exports = {
     module: {
         rules: [
-            { test: /\.md$/, use: [{ loader: 'vue-loader' }, { loader: '@mbvue/markdown-loader' }] }
+            { test: /\.md$/, use: [{ loader: 'vue-loader' }, { loader: '@mbvue/markdown-loader', options: { toc: { ... }, anchor: { ... } } }] }
         ]
     }
 };
 ```
 
+2、main.js：
+```js
+import Markdom from '@mbvue/markdown-loader/dom';
+import '@mbvue/markdown-loader/style/index.less'; //import '@mbvue/markdown-loader/style/index.css';
+
+app.use(Markdom);
+```
+
+3、.md：
 ```html
 :::tip
-Content
+content...
 :::
 
 :::warning
-Content
+content...
 :::
 
 :::danger
-Content
+content...
 :::
 
 :::demo html
-
-<menu>menu<menu>
+<div>div</div>
 :::
 ```
+
+## Options
+#### toc
+If you want to close, please set it to false. Other configuration references: markdown-it-table-of-contents options
+
+#### anchor
+If you want to close, please set it to false. Other configuration references: markdown-it-anchor options
+

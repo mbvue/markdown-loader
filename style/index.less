@@ -1,0 +1,313 @@
+.markdown-content {
+    width: 100%;
+    position: relative;
+    padding: 20px;
+
+    a {
+        color: #1890ff;
+        text-decoration: none;
+        outline: none;
+        cursor: pointer;
+        transition: color 0.3s;
+
+        &:hover {
+            color: #40a9ff;
+        }
+
+        &:active {
+            color: #096dd9;
+        }
+
+        &[disabled] {
+            color: rgba(0, 0, 0, 0.25);
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+    }
+
+    table {
+        width: 100%;
+        color: #34495e;
+        font-size: 14px;
+        line-height: 1.5;
+        border-collapse: collapse;
+        border-spacing: 0;
+
+        tr {
+            &:hover {
+                background: #f0f0f0;
+            }
+
+            th {
+                padding: 8px 10px;
+                font-weight: 600;
+                text-align: left;
+                vertical-align: top;
+            }
+
+            td {
+                padding: 8px;
+                border-top: 1px solid #ebedf0;
+                vertical-align: top;
+            }
+        }
+
+        thead tr:hover {
+            background: none;
+        }
+    }
+
+    &.markdown-has-toc {
+        padding-right: 230px;
+
+        .markdown-toc {
+            width: 210px;
+            position: fixed;
+            top: 0;
+            right: 10px;
+            z-index: 9;
+            padding: 20px;
+
+            &::after {
+                content: '';
+                display: block;
+                width: 2px;
+                position: absolute;
+                left: 0;
+                top: 20px;
+                bottom: 20px;
+                background: #f0f0f0;
+            }
+
+            ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+
+                li {
+                    margin: 5px 0;
+
+                    ul {
+                        padding-left: 15px;
+                    }
+
+                    a {
+                        display: block;
+                        text-decoration: none;
+                        overflow: hidden;
+                        color: rgba(0, 0, 0, 0.65);
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        transition: all 0.3s;
+
+                        &:hover {
+                            color: #1890ff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .markdown-anchor {
+        color: #1890ff;
+        text-decoration: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        &:hover {
+            .markdown-anchor {
+                opacity: 1;
+            }
+        }
+    }
+
+    .markdown-tip,
+    .markdown-warning,
+    .markdown-danger {
+        margin-bottom: 15px;
+        padding: 15px 15px 15px 30px;
+        position: relative;
+
+        &::before {
+            content: '';
+            display: block;
+            width: 5px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        p {
+            margin: 0;
+            font-size: 16px;
+            line-height: 26px;
+        }
+    }
+
+    .markdown-tip {
+        background: #ecf5ff;
+
+        &::before {
+            background: #42b983;
+        }
+
+        p {
+            color: #34495e;
+        }
+    }
+
+    .markdown-warning {
+        background: #f3e2c8;
+
+        &::before {
+            background: #e6a23c;
+        }
+
+        p {
+            color: #6b5900;
+        }
+    }
+
+    .markdown-danger {
+        background: #f7bfbf;
+
+        &::before {
+            background: #f56c6c;
+        }
+
+        p {
+            color: #4d0000;
+        }
+    }
+
+    .markdown-hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 12px;
+        position: relative;
+        background: #f0f0f0;
+        border-radius: 5px;
+
+        code {
+            font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+        }
+
+        em {
+            position: absolute;
+            right: 10px;
+            top: 6px;
+            color: #888888;
+        }
+
+        .hljs-comment {
+            color: #888888;
+        }
+
+        .hljs-built_in,
+        .hljs-bullet,
+        .hljs-code,
+        .hljs-addition {
+            color: #0b8235;
+        }
+
+        .hljs-attr {
+            color: #945daa;
+        }
+
+        .hljs-keyword,
+        .hljs-attribute,
+        .hljs-selector-tag,
+        .hljs-meta-keyword,
+        .hljs-doctag,
+        .hljs-name {
+            color: #f81d22;
+        }
+
+        .hljs-type,
+        .hljs-string,
+        .hljs-number,
+        .hljs-selector-id,
+        .hljs-selector-class,
+        .hljs-quote,
+        .hljs-template-tag,
+        .hljs-deletion {
+            color: #0b8235;
+        }
+
+        .hljs-title,
+        .hljs-section {
+            color: #880000;
+            font-weight: bold;
+        }
+
+        .hljs-regexp,
+        .hljs-symbol,
+        .hljs-variable,
+        .hljs-template-variable,
+        .hljs-link,
+        .hljs-selector-attr,
+        .hljs-selector-pseudo {
+            color: #bc6060;
+        }
+
+        .hljs-literal {
+            color: #78a960;
+        }
+
+        .hljs-meta {
+            color: #1f7199;
+        }
+
+        .hljs-meta-string {
+            color: #4d99bf;
+        }
+
+        .hljs-emphasis {
+            font-style: italic;
+        }
+
+        .hljs-strong {
+            font-weight: bold;
+        }
+    }
+
+    .markdown-demo-block {
+        position: relative;
+        background: #ffffff;
+        border: 1px solid #ebedf0;
+        border-radius: 5px;
+
+        .markdown-demo-block-source {
+            padding: 15px;
+        }
+
+        .markdown-demo-block-button {
+            position: absolute;
+            right: 10px;
+            top: 6px;
+            cursor: pointer;
+            color: #aeb0b3;
+            user-select: none;
+
+            &:hover {
+                color: inherit;
+            }
+        }
+
+        .markdown-demo-block-code {
+            .markdown-hljs {
+                margin: 0;
+                border-radius: 0;
+            }
+        }
+    }
+}

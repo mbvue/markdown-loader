@@ -1,6 +1,10 @@
 <template>
     <div class="markdown-demo-block">
-        <div class="markdown-demo-block-source"><slot name="source"></slot></div>
+        <div class="markdown-demo-block-source">
+            <slot v-if="!isComponent" name="source"></slot>
+            <div v-else ref="source"></div>
+        </div>
+
         <div class="markdown-demo-block-button" @click="showCode = !showCode">
             <svg width="1024px" height="1024px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 16px; height: 16px;">
                 <g id="小站" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.779734142">
@@ -15,12 +19,74 @@
 </template>
 
 <script>
+//兼容Vue3引用组件
+let componentList = [];
+//vue
+let vue = require('vue');
+vue = vue ? vue.default || vue : null;
+
+//创建新实例
+const create = (obj, styles, mount) => {
+    if(vue.version.slice(0, 1) === '2'){
+        const MyComponent = vue.extend(obj);
+        return new MyComponent().$mount(mount);
+    }else{
+        let _vue = require('vue/dist/vue.esm-bundler.js');
+        _vue = _vue ? _vue.default || _vue : null;
+
+        if(_vue){
+            const app = _vue.createApp(obj);
+            componentList.map(item => { app.use(item); });
+            app.mount(mount);
+        }
+    }
+
+    //插入样式
+    let style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = styles;
+    mount.parentNode.insertBefore(style, mount.parentNode.childNodes[0]);
+};
+
 export default {
+    props: {
+        isComponent: { type: String, default: null }
+    },
+
     data() {
         return {
             showCode: false
         }
+    },
+
+    mounted() {
+        if(this.isComponent){
+            let source = Buffer.from(this.isComponent, 'base64').toString();
+
+            //提取 Script
+            let script = source.match(/<script>([\s\S]*?)<\/script>/);
+            script = (script ? script[0] : 'module.exports = {}').replace(/<script>/g, '').replace(/<\/script>/g, '').replace(/\\n/g, '').replace(/\\r/g, '').replace(/^\s+|\s+$/g, '');
+
+            script = script.replace('export default', 'module.exports =');
+            let result = new Function('__vuerun', `return (function(exports){var module={};module.exports=exports;${script};return module.exports.__esModule?module.exports.default:module.exports;})({})`)({}) || {};
+
+            //提取 Template
+            result.template = source.match(/<template>([\s\S]*?)<\/template>/);
+            result.template = (result.template ? result.template[0] : '').replace(/<template>/g, '').replace(/<\/template>/g, '').replace(/\\n/g, '').replace(/\\r/g, '').replace(/^\s+|\s+$/g, '');
+
+            //提取 Style
+            let style = source.match(/<style>([\s\S]*?)<\/style>/);
+            style = (style ? style[0] : '').replace(/<style>/g, '').replace(/<\/style>/g, '').replace(/\\n/g, '').replace(/\\r/g, '').replace(/^\s+|\s+$/g, '');
+
+            create(result, style, this.$refs.source);
+        }
+    },
+
+    methods: {
+        //设置UI组件
+        setComponents(components) {
+            componentList = components || [];
+        }
     }
 }
 </script>
-
